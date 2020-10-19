@@ -1,16 +1,16 @@
 #Define biblioteca da GPIO
 import RPi.GPIO as GPIO
- 
+
 #Define biblioteca de tempo
 import time                           
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
-lista_botoes = [16]
+lista_botoes = [16, 18]
+canais = {1:18}
  
 
 def inicializa_controle():
-	
 	for pino in lista_botoes:
 		GPIO.setup(pino, GPIO.OUT)
 		GPIO.output(pino, 1)
@@ -18,14 +18,21 @@ def inicializa_controle():
 	GPIO.output(12, 1)
 	
 def finaliza_controle():
-	
 	GPIO.output(12, 0)
 	for pino in lista_botoes:
 		GPIO.output(pino, 0)
 	 
-def aperta_botao(pino):
+def aperta_botao(pino, tempo):
 	GPIO.output(pino, 0)
-	time.sleep(0.5)
+	time.sleep(tempo)
 	GPIO.output(pino, 1)
 
+def comando(canal, botao):
+	aperta_botao(canais[canal], 0.3)
+	time.sleep(0.5)
+	aperta_botao(botao, 0.3)
 
+def aprende_comando(canal, botao):
+	aperta_botao(canais[canal], 2)
+	time.sleep(1)
+	aperta_botao(botao, 0.3)
