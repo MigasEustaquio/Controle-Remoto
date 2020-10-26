@@ -8,38 +8,24 @@ ask = Ask(app, '/')
 statusTela = 'off'
 statusTV = 'off'
 
-@ask.intent('LedIntent')
-def led(color, status):
-  if color.lower() not in pins.keys():
-    return statement("I don't have {} light".format(color)) 
-  GPIO.output(pins[color], GPIO.HIGH if status == 'on' else GPIO.LOW)
-  return statement('Turning the {} light {}'.format(color, status))
+inicializa_controle()
   
 @ask.intent('LigarLuz')
 def ligarLuz():
-    inicializa_controle()    #ainda não pode fazer aqui dentro pq não aperta o botão TV
+    #inicializa_controle()
     
-    aperta_botao(16)
+    aperta_botao(16, 0.5)
     
-    finaliza_controle()
+    #finaliza_controle()
 
     return statement('Turning tv on')
     
-@ask.intent('DesligarLuz')
-def desligarLuz():
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(16, GPIO.OUT)
-    GPIO.output(16, 0)
-    time.sleep(0.5)
-    GPIO.output(16, 1)
-    return statement('Turning tv off')
-
 
 @ask.intent('LigarTela')
 def ligarTela(status):
     if status == 'on':
       if statusTela == 'off':
-        comando(0, 0) #mandar canal e botao respectivamente no parametro
+        aperta_botao(16, 0.5) #para fins de teste está apontando para o botão da tv
         statusTela = 'on'
         return statement('Turning screen on')
       else:
@@ -47,32 +33,21 @@ def ligarTela(status):
 
     if status == 'off':
       if statusTela == 'on':
-        comando(0, 0) #mandar canal e botao respectivamente no parametro
+        aperta_botao(16, 0.5) #para fins de teste está apontando para o botão da tv
         statusTela = 'off'
         return statement('Turning screen off')
       else:
         return statement('Screen is already turned off')
 
 
-@ask.intent('MudarVolume')
+@ask.intent('MudarVolume') #Alterar essa função para mudar quantidades maiores de volume por vez
 def mudarVolume(volume):
     if volume == 'up':
-      comando(0,0) #mandar canal e botao respectivamente no parametro
+      aperta_botao(0, 0.5) #mandar pino correto
       return statement('Turning the volume {}'.format(volume))
     else:
-      comando(0,0) #mandar canal e botao respectivamente no parametro
+      comando(0, 0.5) #mandar pino correto
       return statement('Turning the volume {}'.format(volume))
-
-    
-
-
-
-@ask.intent('LightIntent')
-def desligarLuz(status):
-    GPIO.setmode(GPIO.BOARD)
-    GPIO.setup(12, GPIO.OUT)
-    GPIO.output(12, GPIO.HIGH if status == 'on' else GPIO.LOW)
-    return statement('Turning the led {}'.format(status))
 
  
 if __name__ == '__main__':
@@ -80,4 +55,5 @@ if __name__ == '__main__':
   try:
     app.run(debug=True)
   finally:
+    finaliza_controle()
     GPIO.cleanup()
