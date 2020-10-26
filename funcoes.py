@@ -6,8 +6,8 @@ import time
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
-lista_botoes = [16, 18]
-canais = {1:18}
+lista_botoes = [16]
+#canais = {1:18}
  
 
 def inicializa_controle():
@@ -28,14 +28,16 @@ def aperta_botao(pino, tempo):
 	GPIO.output(pino, 1)
 	return
 
-def comando(canal, botao):
-	aperta_botao(canais[canal], 0.3)
-	time.sleep(0.5)
-	aperta_botao(botao, 0.3)
 
-def aprende_comando(canal, botao):
-	aperta_botao(canais[canal], 2)
-	time.sleep(1)
+#def comando(canal, botao):
+#	aperta_botao(canais[canal], 0.3)
+#	time.sleep(0.5)
+#	aperta_botao(botao, 0.3)
+#
+#def aprende_comando(canal, botao):
+#	aperta_botao(canais[canal], 2)
+#	time.sleep(1)
+
 
 for pino in lista_botoes:
 	GPIO.setup(pino, GPIO.OUT)
