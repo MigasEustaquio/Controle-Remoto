@@ -34,7 +34,7 @@ def ligarTela(status, device):
   if status == 'on':
     if estado == 'off':
       if device == 'screen':
-        aperta_botao(11, 0.5)
+        aperta_botao(15, 0.5)
         statusTela = 'on'
       else:
         aperta_botao(16, 0.5)
@@ -45,7 +45,7 @@ def ligarTela(status, device):
   else:
     if estado == 'on':
       if device == 'screen':
-        aperta_botao(11, 0.5)
+        aperta_botao(15, 0.5)
         statusTela = 'off'
       else:
         aperta_botao(16, 0.5)
@@ -59,7 +59,7 @@ def ligarTela(status, device):
 def ligarTela(device, status):
     
   if device == 'screen':
-    aperta_botao(11, 0.5)
+    aperta_botao(15, 0.5)
     return statement("I'm sorry. Trying to turn {} the screen again".format(status))
   else:
     aperta_botao(16, 0.5)

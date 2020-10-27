@@ -6,7 +6,7 @@ import time
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
-lista_botoes = [16, 11]
+lista_botoes = [15, 16]
 #canais = {1:18}
  
 
