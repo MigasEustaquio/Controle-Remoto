@@ -6,7 +6,7 @@ Esse é um programa necessário para utilizar uma skill da alexa bem simples com
 
 1.Execute o instalador.sh
 
-2.Registre-se no site do [ngrok clicando aqui](https://dashboard.ngrok.com/signup) depois copie seu token de autorização e cole no terminal dessa forma: ./ngrok authtoken <TOKEN>
+2.Registre-se no site do [ngrok clicando aqui](https://dashboard.ngrok.com/signup) depois copie seu token de autorização e associe sua conta ao seu dispositivo colando no terminal dessa forma: ./ngrok authtoken "TOKEN" (sem as aspas)
 
 3.Inicie a aplicação alexaskill com o comando: python3 alexaskill.py
 
