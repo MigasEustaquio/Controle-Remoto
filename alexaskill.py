@@ -8,20 +8,9 @@ statusTV = 'off'
  
 app = Flask(__name__)
 ask = Ask(app, '/')
-
-  
-@ask.intent('LigarLuz')
-def ligarLuz():
-    #inicializa_controle()
-    
-    aperta_botao(16, 0.5)
-    
-    #finaliza_controle()
-
-    return statement('Turning tv on')
     
 
-@ask.intent('LigarTela')
+@ask.intent('LigarTela') #Liga a TV ou a tela
 def ligarTela(status, device):
   global statusTela
   global statusTV
@@ -66,23 +55,21 @@ def ligarTela(device, status):
     return statement("I'm sorry. Trying to turn {} the TV again".format(status))
 
 
-
 @ask.intent('MudarVolume') #Alterar essa funcao para mudar quantidades maiores de volume por vez
 def mudarVolume(volume):
-    if volume == 'up':
+  i=0
+  if volume == 'up':
+    for i < 5:
       aperta_botao(11, 0.5) #mandar pino correto
-#      time.sleep(0.5)
-#      aperta_botao(11, 0.5) #mandar pino correto
-#      time.sleep(0.5)
-#      aperta_botao(11, 0.5) #mandar pino correto
-#      time.sleep(0.5)
-#      aperta_botao(11, 0.5) #mandar pino correto
-#      time.sleep(0.5)
-#      aperta_botao(11, 0.5) #mandar pino correto
-      return statement('Turning the volume {}'.format(volume))
-    else:
-      aperta_botao(11, 0.5) #mandar pino correto
-      return statement('Turning the volume {}'.format(volume))
+      time.sleep(0.5)
+      i+=1
+    return statement('Turning the volume {}'.format(volume))
+   else:
+     for i < 5:
+       aperta_botao(11, 0.5) #mandar pino correto
+       time.sleep(0.5)
+       i+=1
+     return statement('Turning the volume {}'.format(volume))
 
  
 if __name__ == '__main__':
